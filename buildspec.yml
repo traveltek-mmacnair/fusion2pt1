@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+ install:
+   commands:
+     - ls
+     - HASH=$(echo $CODEBUILD_SOURCE_VERSION | md5sum | awk '{print $1}')
+     - echo $HASH
+     - ls
+     - sed -i -e "s/RAND/$HASH/g" appspec.yml
+     - sed -i -e "s/RAND/$HASH/g" postinstall.sh
+     - sed -i -e "s/RAND/$HASH/g" preinstall.sh
+     - cat appspec.yml postinstall.sh preinstall.sh
+ build:
+   commands:
+artifacts:
+  files:
+    - '**/*'

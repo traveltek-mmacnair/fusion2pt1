@@ -1,0 +1,13 @@
+version: 0.0
+os: linux
+files:
+
+  - source: /
+    destination: /deploy/fusion2pt1/temp/RAND
+
+hooks:
+  BeforeInstall:
+    - location: preinstall.sh
+      runas: root
+  AfterInstall:
+    - location: postinstall.sh
